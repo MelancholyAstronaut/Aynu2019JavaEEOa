@@ -28,7 +28,7 @@ public class NewsLabelManagement {
         request.getSession().setAttribute("name",name);
 
         //1.如果remember被选中,设置session过期时间
-        if (remember.equals("1")) {
+        if ("1".equals(remember)) {
             System.out.println("已经设置session过期时间");
             HttpSession session = request.getSession();
             session.setAttribute(name, name);
@@ -44,7 +44,7 @@ public class NewsLabelManagement {
     }
 
     @RequestMapping("/checkAll")
-    public String CheckAll(Model model, @RequestParam(defaultValue = "1") int pageName) {
+    public String checkAll(Model model, @RequestParam(defaultValue = "1") int pageName) {
         //第一页开始显示,pageSize为3
         PageHelper.startPage(pageName, 3);
 //      List<Newslabel> l = iNewsManagerServices.checkAllLable(pages);
@@ -89,7 +89,7 @@ public class NewsLabelManagement {
 
 
     @RequestMapping("ajaxParentFlash")
-    public String SelectAllChildLabel(int id, Model model, @RequestParam(defaultValue = "1") int pageNum) {
+    public String selectAllChildLabel(int id, Model model, @RequestParam(defaultValue = "1") int pageNum) {
         if (id == 0) {
             return "redirect:/newsLabel/checkAll";
         }
